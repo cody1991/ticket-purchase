@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-09 21:10:07
- * @LastEditTime: 2020-07-10 23:02:52
+ * @LastEditTime: 2020-07-10 23:34:14
  * @LastEditors: codytang
  * @Description: 购票系统
 -->
@@ -9,9 +9,8 @@
 <template>
   <div id="app">
     <HelloWorld :msg="`Welcome to Your ${appName} App`" />
-
     <intro :concert="jayChouConcert"></intro>
-    <display-seats :seats="displaySeats"></display-seats>
+    <display-seats :seats="[...jayChouConcert.seats]"></display-seats>
     <display-users :users="displayUsers"></display-users>
   </div>
 </template>
@@ -20,7 +19,8 @@
 import Seats from "@/models/Seats.js";
 import User from "@/models/User.js";
 
-User.ticketLimit = 5;
+// 设置每个人的购票上限，测试用
+// User.ticketLimit = 5;
 
 import HelloWorld from "@/components/HelloWorld.vue";
 import DisplayUsers from "@/components/DisplayUsers.vue";
@@ -46,12 +46,9 @@ export default {
     Intro,
   },
   beforeDestroy() {
-    this.seats = null;
+    this.jayChouConcert = null;
   },
   computed: {
-    displaySeats() {
-      return this.seats;
-    },
     displayUsers() {
       return this.users.slice(0, this.displayUsersLen);
     },
@@ -65,10 +62,6 @@ export default {
       back: 40,
       step: 2,
     });
-
-    const { seats } = this.jayChouConcert;
-
-    this.seats = seats;
 
     for (let index = 0; index < 1000; index += 1) {
       const user = new User();
@@ -95,18 +88,7 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-.seat-rows {
-  line-height: 5px;
-}
-.seat-cols {
-  display: inline-block;
-  line-height: 5px;
-  height: 5px;
-}
-.intro {
-  font-size: 10px;
-  margin: 20px;
-}
+
 .seat {
   display: inline-block;
   width: 5px;
@@ -116,15 +98,5 @@ export default {
 }
 .seat.occupy {
   background: red;
-}
-
-.users {
-  padding: 20px;
-  text-align: left;
-  font-size: 12px;
-}
-.user {
-  border-bottom: 1px solid #eee;
-  margin-bottom: 5px;
 }
 </style>

@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 22:13:27
- * @LastEditTime: 2020-07-10 22:14:05
+ * @LastEditTime: 2020-07-10 23:10:35
  * @LastEditors: codytang
  * @Description: 展示用户购票行为
 -->
@@ -32,4 +32,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.users {
+  padding: 20px;
+  text-align: left;
+  font-size: 12px;
+}
+.user {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 5px;
+}
+</style>

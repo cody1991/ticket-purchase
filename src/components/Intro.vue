@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 23:01:38
- * @LastEditTime: 2020-07-10 23:02:12
+ * @LastEditTime: 2020-07-10 23:10:46
  * @LastEditors: codytang
  * @Description: 
 -->
@@ -28,4 +28,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.intro {
+  font-size: 10px;
+  margin: 20px;
+}
+</style>

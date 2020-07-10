@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 22:24:47
- * @LastEditTime: 2020-07-10 23:01:10
+ * @LastEditTime: 2020-07-10 23:34:05
  * @LastEditors: codytang
  * @Description: 展示座位
 -->
@@ -25,11 +25,20 @@
 export default {
   props: {
     seats: {
-      props: Array,
-      deault: () => [],
+      type: Array,
+      default: () => [],
     },
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+.seat-rows {
+  line-height: 5px;
+}
+.seat-cols {
+  display: inline-block;
+  line-height: 5px;
+  height: 5px;
+}
+</style>
