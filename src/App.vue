@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-09 21:10:07
- * @LastEditTime: 2020-07-10 23:34:14
+ * @LastEditTime: 2020-07-10 23:53:50
  * @LastEditors: codytang
  * @Description: 购票系统
 -->
@@ -9,8 +9,11 @@
 <template>
   <div id="app">
     <HelloWorld :msg="`Welcome to Your ${appName} App`" />
-    <intro :concert="jayChouConcert"></intro>
-    <display-seats :seats="[...jayChouConcert.seats]"></display-seats>
+    <intro v-if="jayChouConcert" :concert="jayChouConcert"></intro>
+    <display-seats
+      v-if="jayChouConcert"
+      :seats="[...jayChouConcert.seats]"
+    ></display-seats>
     <display-users :users="displayUsers"></display-users>
   </div>
 </template>
@@ -20,20 +23,20 @@ import Seats from "@/models/Seats.js";
 import User from "@/models/User.js";
 
 // 设置每个人的购票上限，测试用
-// User.ticketLimit = 5;
+User.ticketLimit = 5;
 
 import HelloWorld from "@/components/HelloWorld.vue";
 import DisplayUsers from "@/components/DisplayUsers.vue";
 import DisplaySeats from "@/components/DisplaySeats.vue";
 import Intro from "@/components/Intro.vue";
-import { randomNumber } from "@/libs/utils";
+import { randomNumber, sleep } from "@/libs/utils";
 
 export default {
   name: "App",
   data() {
     return {
       appName: "Ticket Purchase",
-      jayChouConcert: {},
+      jayChouConcert: null,
       seats: [],
       users: [],
       displayUsersLen: 20,
@@ -53,8 +56,7 @@ export default {
       return this.users.slice(0, this.displayUsersLen);
     },
   },
-  mounted() {
-    const self = this;
+  async mounted() {
     // 周杰伦演唱会
     this.jayChouConcert = new Seats({
       block: 4,
@@ -66,14 +68,22 @@ export default {
     for (let index = 0; index < 1000; index += 1) {
       const user = new User();
 
-      setTimeout(function() {
-        self.users.unshift(user);
-        if (self.jayChouConcert.remain - user.ticket >= 0) {
-          self.jayChouConcert.purchaseTicket(user.ticket);
-        } else {
-          user.disabled = true;
-        }
-      }, randomNumber(index * 100, index * 150));
+      if (this.jayChouConcert && this.jayChouConcert.remain === 0) {
+        alert("卖完票啦");
+        break;
+      }
+
+      await sleep(randomNumber(0, 300));
+
+      this.users.unshift(user);
+      if (
+        this.jayChouConcert &&
+        this.jayChouConcert.remain - user.ticket >= 0
+      ) {
+        this.jayChouConcert.purchaseTicket(user.ticket);
+      } else {
+        user.disabled = true;
+      }
     }
   },
 };

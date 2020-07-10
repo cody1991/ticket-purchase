@@ -1,7 +1,7 @@
 /*
  * @Author: codytang
  * @Date: 2020-07-09 23:06:47
- * @LastEditTime: 2020-07-10 00:13:28
+ * @LastEditTime: 2020-07-10 23:49:35
  * @LastEditors: codytang
  * @Description: 公共函数
  */
@@ -20,4 +20,10 @@ function randomNumber(from, to) {
   return from + Math.floor(Math.random() * (to - from + 1));
 }
 
-export { randomString, randomNumber };
+function sleep(seconds) {
+  return new Promise((res) => {
+    setTimeout(res, seconds);
+  });
+}
+
+export { randomString, randomNumber, sleep };
