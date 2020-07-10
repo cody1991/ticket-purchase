@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-09 21:10:07
- * @LastEditTime: 2020-07-10 23:53:50
+ * @LastEditTime: 2020-07-11 00:38:46
  * @LastEditors: codytang
  * @Description: 购票系统
 -->
@@ -73,14 +73,16 @@ export default {
         break;
       }
 
-      await sleep(randomNumber(0, 300));
+      await sleep(randomNumber(0, 1500));
 
       this.users.unshift(user);
       if (
         this.jayChouConcert &&
         this.jayChouConcert.remain - user.ticket >= 0
       ) {
-        this.jayChouConcert.purchaseTicket(user.ticket);
+        user.purchaseTicketPos = this.jayChouConcert.purchaseTicket(
+          user.ticket
+        );
       } else {
         user.disabled = true;
       }

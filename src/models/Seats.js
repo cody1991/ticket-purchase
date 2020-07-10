@@ -1,7 +1,7 @@
 /*
  * @Author: codytang
  * @Date: 2020-07-09 21:16:00
- * @LastEditTime: 2020-07-10 00:27:16
+ * @LastEditTime: 2020-07-11 00:41:24
  * @LastEditors: codytang
  * @Description: 生成演唱会座位
  */
@@ -60,6 +60,7 @@ class Seats {
   purchaseTicket(ticketNumber) {
     this.used += ticketNumber;
     let count = ticketNumber;
+    const curUsedList = [];
     // 简单实现
     for (let rows = 0; rows < this.floor; rows += 1) {
       const curItem = this.seats[rows];
@@ -68,6 +69,9 @@ class Seats {
       for (let cols = 0; cols < rowsLen; cols += 1) {
         if (curItem[cols] === 0 && count !== 0) {
           curItem[cols] = 1;
+
+          curUsedList.push(this.calcPosition(rows, cols));
+
           count = count - 1;
         }
 
@@ -75,6 +79,15 @@ class Seats {
       }
       if (count === 0) break;
     }
+    return curUsedList;
+  }
+
+  calcPosition(row, col) {
+    // todo 新增 区块
+    return {
+      row: this.floor - row, // 返回第几排
+      col: col + 1, // 返回第几列
+    };
   }
 }
 

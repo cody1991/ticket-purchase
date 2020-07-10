@@ -1,7 +1,7 @@
 /*
  * @Author: codytang
  * @Date: 2020-07-09 22:57:56
- * @LastEditTime: 2020-07-09 23:27:08
+ * @LastEditTime: 2020-07-11 00:37:02
  * @LastEditors: codytang
  * @Description: 管理用户
  */
@@ -20,7 +20,7 @@ class User {
      * @return:
      */
 
-    this.name = randomString(randomNumber(3, 10));
+    this.name = randomString(randomNumber(5, 10));
     this.id = randomString(32);
     this.ticket = randomNumber(1, User.ticketLimit);
   }
