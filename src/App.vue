@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-09 21:10:07
- * @LastEditTime: 2020-07-10 00:49:48
+ * @LastEditTime: 2020-07-10 23:02:52
  * @LastEditors: codytang
  * @Description: 购票系统
 -->
@@ -9,39 +9,10 @@
 <template>
   <div id="app">
     <HelloWorld :msg="`Welcome to Your ${appName} App`" />
-    <div class="intro">
-      一共有 {{ jayChouConcert.sum }} 个座位，已经使用
-      {{ jayChouConcert.used }} 个座位，还剩下
-      {{ jayChouConcert.remain }}个座位<br />
-      <div class="seat"></div>
-      代表空闲座位
-      <div class="seat occupy"></div>
-      代表已占用座位
-    </div>
 
-    <div v-for="(rows, rowsIndex) in seats" :key="rowsIndex" class="seat-rows">
-      <div v-for="(cols, colsIndex) in rows" :key="colsIndex" class="seat-cols">
-        <div
-          class="seat"
-          :class="{
-            occupy: cols,
-          }"
-        ></div>
-      </div>
-    </div>
-
-    <div class="users">
-      <div class="user" v-for="user in displayUsers" :key="user.id">
-        <span v-if="!user.disabled">
-          用户 {{ user.name }} (ID: {{ user.id && user.id.slice(0, 10) }})
-          购买了 {{ user.ticket }} 张票
-        </span>
-        <span v-else style="color: red;">
-          用户 {{ user.name }} (ID: {{ user.id && user.id.slice(0, 10) }})
-          购票失败
-        </span>
-      </div>
-    </div>
+    <intro :concert="jayChouConcert"></intro>
+    <display-seats :seats="displaySeats"></display-seats>
+    <display-users :users="displayUsers"></display-users>
   </div>
 </template>
 
@@ -52,6 +23,9 @@ import User from "@/models/User.js";
 User.ticketLimit = 5;
 
 import HelloWorld from "@/components/HelloWorld.vue";
+import DisplayUsers from "@/components/DisplayUsers.vue";
+import DisplaySeats from "@/components/DisplaySeats.vue";
+import Intro from "@/components/Intro.vue";
 import { randomNumber } from "@/libs/utils";
 
 export default {
@@ -67,6 +41,9 @@ export default {
   },
   components: {
     HelloWorld,
+    DisplayUsers,
+    DisplaySeats,
+    Intro,
   },
   beforeDestroy() {
     this.seats = null;
