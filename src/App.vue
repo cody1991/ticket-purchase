@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-09 21:10:07
- * @LastEditTime: 2020-07-11 15:19:59
+ * @LastEditTime: 2020-07-11 16:17:03
  * @LastEditors: codytang
  * @Description: 购票系统
 -->
@@ -45,7 +45,7 @@ export default {
       users: [],
       displayUsersLen: 25, // 用户展示区域的最大长度
       sleepMax: 200, // 模拟等待时间的峰值
-      refundRate: 0.1, // 用户退票的概率
+      refundRate: 0, // 用户退票的概率
     };
   },
   components: {
@@ -67,7 +67,7 @@ export default {
     this.jayChouConcert = new Seats({
       block: 4,
       front: 5,
-      back: 40,
+      back: 10,
       step: 2,
     });
 
