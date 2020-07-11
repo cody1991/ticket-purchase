@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 22:13:27
- * @LastEditTime: 2020-07-11 15:01:44
+ * @LastEditTime: 2020-07-11 15:14:15
  * @LastEditors: codytang
  * @Description: 展示用户购票行为
 -->
@@ -13,12 +13,14 @@
       <span v-if="user.status === 'SUCCESS'" class="success">
         购买了
         {{ user.ticket }} 张票
-        <span
-          v-for="pos in user.purchaseTicketPos"
-          :key="pos.row + '-' + pos.col"
-          class="pos"
-          >{{ pos.block }}区{{ pos.row }}排{{ pos.col }}座</span
-        >
+        <div class="pos-group">
+          <span
+            v-for="pos in user.purchaseTicketPos"
+            :key="pos.row + '-' + pos.col"
+            class="pos"
+            >{{ pos.block }}区{{ pos.row }}排{{ pos.col }}座</span
+          >
+        </div>
       </span>
       <span v-else-if="user.status === 'FAIL'" class="error">
         购票失败
@@ -50,7 +52,9 @@ export default {
 .user {
   border-bottom: 1px solid #eee;
   margin-bottom: 18px;
-  padding-bottom: 5px;
+}
+.pos-group {
+  margin: 5px 0;
 }
 .pos {
   border: 1px solid #67c23a;
