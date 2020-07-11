@@ -1,7 +1,7 @@
 /*
  * @Author: codytang
  * @Date: 2020-07-11 18:57:35
- * @LastEditTime: 2020-07-11 23:58:18
+ * @LastEditTime: 2020-07-12 00:39:36
  * @LastEditors: codytang
  * @Description: 优化选座位算法
  */
@@ -24,7 +24,9 @@ class AdvancedSeats extends Seats {
     for (let index = 0; index < ticket; index += 1) {
       const selectItem = freeMapArray[selectSeatIndex];
       const [key, value] = selectItem;
-      const [row, col] = key.split("-");
+      let [row, col] = key.split("-");
+      row = Number(row);
+      col = Number(col);
       this.seats[row][col] = Object.assign(this.seats[row][col], {
         state: 1,
         user,
