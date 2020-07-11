@@ -1,12 +1,12 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 22:06:46
- * @LastEditTime: 2020-07-11 12:02:25
+ * @LastEditTime: 2020-07-11 12:05:07
  * @LastEditors: codytang
  * @Description: README
 -->
 
-# ticket purchase
+# Ticket Purchase [![Build Status](https://travis-ci.org/cody1991/ticket-purchase.svg?branch=master)](https://travis-ci.org/cody1991/ticket-purchase)
 
 ## 任务列表
 
