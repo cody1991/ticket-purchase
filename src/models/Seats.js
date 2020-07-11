@@ -1,7 +1,7 @@
 /*
  * @Author: codytang
  * @Date: 2020-07-09 21:16:00
- * @LastEditTime: 2020-07-11 14:51:40
+ * @LastEditTime: 2020-07-11 18:43:38
  * @LastEditors: codytang
  * @Description: 生成演唱会座位
  */
@@ -46,13 +46,18 @@ class Seats {
       `Seats init with \nblock ${this.block} \nfront ${this.front} \nback ${this.back} \nstep ${this.step} \nfloor ${this.floor}`
     );
     this.seats = [];
-    for (let rows = 0; rows < this.floor; rows++) {
-      const floorLen = (this.back - this.step * rows) * this.block;
-      this.seats[rows] = Array(floorLen).fill({
-        state: 0, // 初始化为0，代表还没有售出
-        user: null,
-      });
-      this.sum += floorLen;
+    for (let row = 0; row < this.floor; row++) {
+      const rowsLen = (this.front + this.step * row) * this.block;
+      this.seats[row] = [];
+      for (let col = 0; col < rowsLen; col += 1) {
+        this.seats[row].push({
+          state: 0, // 初始化为0，代表还没有售出
+          user: null,
+          block: this.calcBlock(col, rowsLen, this.block),
+        });
+      }
+
+      this.sum += rowsLen;
     }
   }
 
@@ -66,22 +71,22 @@ class Seats {
     let count = ticket;
     const curUsedList = [];
     // 简单实现
-    for (let rows = 0; rows < this.floor; rows += 1) {
-      const curItem = this.seats[rows];
+    for (let row = 0; row < this.floor; row += 1) {
+      const curItem = this.seats[row];
       const rowsLen = curItem.length;
-
-      for (let cols = 0; cols < rowsLen; cols += 1) {
-        if (curItem[cols].state === 0 && count !== 0) {
-          curItem[cols] = {
+      for (let col = 0; col < rowsLen; col += 1) {
+        if (curItem[col].state === 0 && count !== 0) {
+          this.seats[row][col] = Object.assign(curItem[col], {
             state: 1,
             user,
-          };
-
-          curUsedList.push(this.calcPosition(rows, cols, rowsLen));
-
+          });
+          curUsedList.push({
+            row,
+            col,
+            block: curItem[col].block,
+          });
           count = count - 1;
         }
-
         if (count === 0) break;
       }
       if (count === 0) break;
@@ -89,28 +94,23 @@ class Seats {
     return curUsedList;
   }
 
-  calcPosition(row, col, rowsLen) {
-    // todo 新增 区块
-    return {
-      block: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"[
-        Math.floor(col / (rowsLen / this.block))
-      ], // 简单获取区块标识，从A-Za-z，不能超过 26 * 2
-      row: this.floor - row, // 返回第几排
-      col: col + 1, // 返回第几列
-    };
+  calcBlock(col, rowsLen, block) {
+    return "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"[
+      Math.floor(col / (rowsLen / block))
+    ]; // 简单获取区块标识，从A-Za-z，不能超过 26 * 2
   }
 
   refundTicket(user) {
-    if (!user) return;
+    if (!user || !user.purchaseTicketPos || user.purchaseTicketPos.length === 0)
+      return;
     user.purchaseTicketPos.map((ticket) => {
       const { row, col } = ticket;
-      this.seats[this.floor - row][col - 1] = {
+      this.seats[row][col] = Object.assign(this.seats[row][col], {
         state: 0,
         user: null,
-      };
+      });
     });
     this.used -= user.purchaseTicketPos.length;
-    user.purchaseTicketPos = [];
   }
 }
 

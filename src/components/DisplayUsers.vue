@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 22:13:27
- * @LastEditTime: 2020-07-11 15:25:51
+ * @LastEditTime: 2020-07-11 17:19:44
  * @LastEditors: codytang
  * @Description: 展示用户购票行为
 -->
@@ -19,7 +19,7 @@
             v-for="pos in user.purchaseTicketPos"
             :key="pos.row + '-' + pos.col"
             class="pos"
-            >{{ pos.block }}区{{ pos.row }}排{{ pos.col }}座</span
+            >{{ pos.block }}区{{ pos.row + 1 }}排{{ pos.col + 1 }}座</span
           >
         </div>
       </span>
@@ -28,6 +28,14 @@
       </span>
       <span v-else-if="user.status === 'REFUND'" class="warning">
         退票成功
+        <div class="pos-group">
+          <span
+            v-for="pos in user.purchaseTicketPos"
+            :key="pos.row + '-' + pos.col"
+            class="pos"
+            >{{ pos.block }}区{{ pos.row + 1 }}排{{ pos.col + 1 }}座</span
+          >
+        </div>
       </span>
     </div>
   </div>
@@ -65,5 +73,8 @@ export default {
   box-sizing: border-box;
   white-space: nowrap;
   display: inline-block;
+}
+.warning .pos {
+  border: 1px solid #e6a23c;
 }
 </style>
