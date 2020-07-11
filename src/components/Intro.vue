@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 23:01:38
- * @LastEditTime: 2020-07-10 23:10:46
+ * @LastEditTime: 2020-07-11 15:05:35
  * @LastEditors: codytang
  * @Description: 
 -->
@@ -10,6 +10,9 @@
   <div class="intro">
     一共有 {{ concert.sum }} 个座位，已经使用 {{ concert.used }} 个座位，还剩下
     {{ concert.remain }}个座位<br />
+    一共有 {{ users.length }} 个用户，成功购票的有
+    {{ usersSuccess.length }}，成功退票的有
+    {{ usersRefund.length }}，购票失败的有 {{ usersFail.length }}<br />
     <div class="seat"></div>
     代表空闲座位
     <div class="seat occupy"></div>
@@ -23,6 +26,21 @@ export default {
     concert: {
       type: Object,
       default: () => {},
+    },
+    users: {
+      type: Array,
+      default: () => [],
+    },
+  },
+  computed: {
+    usersSuccess() {
+      return this.users.filter((item) => item.status === "SUCCESS");
+    },
+    usersFail() {
+      return this.users.filter((item) => item.status === "FAIL");
+    },
+    usersRefund() {
+      return this.users.filter((item) => item.status === "REFUND");
     },
   },
 };

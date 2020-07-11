@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 22:24:47
- * @LastEditTime: 2020-07-10 23:34:05
+ * @LastEditTime: 2020-07-11 12:48:09
  * @LastEditors: codytang
  * @Description: 展示座位
 -->
@@ -13,7 +13,7 @@
         <div
           class="seat"
           :class="{
-            occupy: cols,
+            occupy: cols.state,
           }"
         ></div>
       </div>

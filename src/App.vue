@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-09 21:10:07
- * @LastEditTime: 2020-07-11 12:35:40
+ * @LastEditTime: 2020-07-11 15:07:42
  * @LastEditors: codytang
  * @Description: 购票系统
 -->
@@ -9,7 +9,11 @@
 <template>
   <div id="app">
     <HelloWorld :msg="`Welcome to Your ${appName} App`" />
-    <intro v-if="jayChouConcert" :concert="jayChouConcert"></intro>
+    <intro
+      v-if="jayChouConcert"
+      :concert="jayChouConcert"
+      :users="users"
+    ></intro>
     <display-seats
       v-if="jayChouConcert"
       :seats="[...jayChouConcert.seats]"
@@ -39,7 +43,7 @@ export default {
       jayChouConcert: null,
       seats: [],
       users: [],
-      displayUsersLen: 20,
+      displayUsersLen: 10,
     };
   },
   components: {
@@ -66,18 +70,34 @@ export default {
     });
 
     while (this.jayChouConcert && this.jayChouConcert.remain) {
-      await sleep(randomNumber(0, 100));
-      const user = new User();
-      this.users.unshift(user);
-      if (
-        this.jayChouConcert &&
-        this.jayChouConcert.remain - user.ticket >= 0
-      ) {
-        user.purchaseTicketPos = this.jayChouConcert.purchaseTicket(
-          user.ticket
-        );
+      // 一旦无票，则结束整个程序
+      await sleep(randomNumber(0, 50));
+
+      if (!this.jayChouConcert) return;
+
+      if (Math.random() > 0.1) {
+        // 新用户购票逻辑，购票不考虑已存在用户重新购票
+        const user = new User();
+        this.users.unshift(user);
+        if (
+          this.jayChouConcert &&
+          this.jayChouConcert.remain - user.ticket >= 0
+        ) {
+          user.purchaseTicketPos = this.jayChouConcert.purchaseTicket(user);
+          user.status = "SUCCESS";
+        } else {
+          user.status = "FAIL";
+        }
       } else {
-        user.disabled = true;
+        // 用户退票逻辑处理
+        if (this.users.length && this.users.length > 0) {
+          const index = randomNumber(0, this.users.length - 1);
+          const user = this.users[index];
+          user.status = "REFUND";
+          this.users.splice(index, 1);
+          this.users.unshift(user);
+          this.jayChouConcert.refundTicket(user);
+        }
       }
     }
   },
@@ -102,5 +122,15 @@ export default {
 }
 .seat.occupy {
   background: red;
+}
+
+.success {
+  color: #67c23a;
+}
+.error {
+  color: #f56c6c;
+}
+.warning {
+  color: #e6a23c;
 }
 </style>
