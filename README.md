@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 22:06:46
- * @LastEditTime: 2020-07-11 19:00:39
+ * @LastEditTime: 2020-07-12 00:20:45
  * @LastEditors: codytang
  * @Description: README
 -->
@@ -27,5 +27,5 @@
 - Algorithm
   - [x] purchase ticket by order 按顺序购票，无太多逻辑
   - [x] 支持退票
-  - [ ] 随机购票
+  - [x] 随机购票
   - [ ] 邻座分配

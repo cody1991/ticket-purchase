@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-09 21:10:07
- * @LastEditTime: 2020-07-11 23:59:05
+ * @LastEditTime: 2020-07-12 00:24:58
  * @LastEditors: codytang
  * @Description: 购票系统
 -->
@@ -9,6 +9,9 @@
 <template>
   <div id="app">
     <HelloWorld :msg="`Welcome to Your ${appName} App`" />
+    <a href="https://github.com/cody1991/ticket-purchase" class="github">
+      <img src="./assets/GitHub.png" alt="" />
+    </a>
     <intro
       v-if="jayChouConcert"
       :concert="jayChouConcert"
@@ -164,5 +167,15 @@ export default {
   border-radius: 4px;
   margin-top: 20px;
   cursor: pointer;
+}
+.github {
+  width: 40px;
+  height: 40px;
+  display: block;
+  margin: 10px auto;
+}
+.github img {
+  width: 100%;
+  height: 100%;
 }
 </style>
