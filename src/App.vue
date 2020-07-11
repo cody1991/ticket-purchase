@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-09 21:10:07
- * @LastEditTime: 2020-07-11 19:25:59
+ * @LastEditTime: 2020-07-11 23:59:05
  * @LastEditors: codytang
  * @Description: 购票系统
 -->
@@ -18,7 +18,7 @@
       v-if="jayChouConcert"
       :seats="[...jayChouConcert.seats]"
     ></display-seats>
-    <div class="btn" @click="stop = !stop">
+    <div class="btn" @click="handleStopStatus">
       <span v-if="!stop">停止售票</span><span v-else>开始售票</span>
     </div>
     <display-users :users="displayUsers"></display-users>
@@ -48,7 +48,7 @@ export default {
       users: [],
       displayUsersLen: 25, // 用户展示区域的最大长度
       sleepMax: 100, // 模拟等待时间的峰值
-      refundRate: 0.5, // 用户退票的概率
+      refundRate: 0.1, // 用户退票的概率
       block: 2,
       front: 1,
       back: 30,
@@ -70,6 +70,11 @@ export default {
       return this.users.slice(0, this.displayUsersLen);
     },
   },
+  methods: {
+    handleStopStatus() {
+      this.stop = !this.stop;
+    },
+  },
   async mounted() {
     // 周杰伦的演唱会
     this.jayChouConcert = new AdvancedSeats({
@@ -78,6 +83,8 @@ export default {
       back: this.back,
       step: this.step,
     });
+
+    console.log(this.jayChouConcert);
 
     while (this.jayChouConcert && this.jayChouConcert.remain) {
       // 一旦无票，则结束整个程序
@@ -104,7 +111,7 @@ export default {
         if (this.users.length && this.users.length > 0) {
           const index = randomNumber(0, this.users.length - 1);
           const user = this.users[index];
-          if (user.status !== "SUCCESS") {
+          if (user.status === "SUCCESS") {
             // 只处理成功买票的
             user.status = "REFUND";
             this.users.splice(index, 1);

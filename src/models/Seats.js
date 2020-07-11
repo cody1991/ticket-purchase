@@ -1,7 +1,7 @@
 /*
  * @Author: codytang
  * @Date: 2020-07-09 21:16:00
- * @LastEditTime: 2020-07-11 18:57:10
+ * @LastEditTime: 2020-07-11 23:02:48
  * @LastEditors: codytang
  * @Description: 生成演唱会座位
  */
@@ -25,6 +25,9 @@ class Seats {
     this.step = step;
     this.sum = 0; // 座位总数，直接存下来，方便获取
     this.used = 0; // 已经售出的座位
+
+    this.freeMap = new Map(); // 未售出
+    this.busyMap = new Map(); // 已售出
 
     /**
      * 计算楼层数
@@ -50,11 +53,13 @@ class Seats {
       const rowsLen = (this.front + this.step * row) * this.block;
       this.seats[row] = [];
       for (let col = 0; col < rowsLen; col += 1) {
-        this.seats[row].push({
+        const item = {
           state: 0, // 初始化为0，代表还没有售出
           user: null,
           block: this.calcBlock(col, rowsLen, this.block),
-        });
+        };
+        this.seats[row].push(item);
+        this.freeMap.set(`${row}-${col}`, item);
       }
 
       this.sum += rowsLen;
@@ -80,6 +85,7 @@ class Seats {
             state: 1,
             user,
           });
+
           curUsedList.push({
             row,
             col,
