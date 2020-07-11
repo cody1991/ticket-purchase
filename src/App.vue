@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-09 21:10:07
- * @LastEditTime: 2020-07-11 15:07:42
+ * @LastEditTime: 2020-07-11 15:19:59
  * @LastEditors: codytang
  * @Description: 购票系统
 -->
@@ -43,7 +43,9 @@ export default {
       jayChouConcert: null,
       seats: [],
       users: [],
-      displayUsersLen: 10,
+      displayUsersLen: 25, // 用户展示区域的最大长度
+      sleepMax: 200, // 模拟等待时间的峰值
+      refundRate: 0.1, // 用户退票的概率
     };
   },
   components: {
@@ -71,11 +73,11 @@ export default {
 
     while (this.jayChouConcert && this.jayChouConcert.remain) {
       // 一旦无票，则结束整个程序
-      await sleep(randomNumber(0, 50));
+      await sleep(randomNumber(0, this.sleepMax));
 
       if (!this.jayChouConcert) return;
 
-      if (Math.random() > 0.1) {
+      if (Math.random() > this.refundRate) {
         // 新用户购票逻辑，购票不考虑已存在用户重新购票
         const user = new User();
         this.users.unshift(user);

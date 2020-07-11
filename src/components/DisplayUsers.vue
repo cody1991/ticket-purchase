@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 22:13:27
- * @LastEditTime: 2020-07-11 15:14:15
+ * @LastEditTime: 2020-07-11 15:20:19
  * @LastEditors: codytang
  * @Description: 展示用户购票行为
 -->
@@ -9,7 +9,8 @@
 <template>
   <div class="users">
     <div class="user" v-for="user in users" :key="user.id">
-      用户 {{ user.name }} (ID: {{ user.id && user.id.slice(0, 4) }})
+      用户 {{ user.name }}
+      <!-- (ID: {{ user.id && user.id.slice(0, 4) }}) -->
       <span v-if="user.status === 'SUCCESS'" class="success">
         购买了
         {{ user.ticket }} 张票
@@ -51,15 +52,16 @@ export default {
 }
 .user {
   border-bottom: 1px solid #eee;
-  margin-bottom: 18px;
+  padding: 18px 0;
 }
 .pos-group {
-  margin: 5px 0;
+  margin: 18px 0 0 0;
 }
 .pos {
   border: 1px solid #67c23a;
-  margin: 0 2px;
+  margin: 0 5px;
   padding: 0 2px;
   border-radius: 2px;
+  box-sizing: border-box;
 }
 </style>
