@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-09 21:10:07
- * @LastEditTime: 2020-07-11 18:42:55
+ * @LastEditTime: 2020-07-11 18:48:48
  * @LastEditors: codytang
  * @Description: 购票系统
 -->
@@ -47,9 +47,9 @@ export default {
       sleepMax: 100, // 模拟等待时间的峰值
       refundRate: 0.5, // 用户退票的概率
       block: 2,
-      front: 2,
-      back: 10,
-      step: 2,
+      front: 1,
+      back: 30,
+      step: 1,
     };
   },
   components: {

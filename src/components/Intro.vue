@@ -1,13 +1,16 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 23:01:38
- * @LastEditTime: 2020-07-11 18:19:34
+ * @LastEditTime: 2020-07-11 18:50:31
  * @LastEditors: codytang
  * @Description: 
 -->
 
 <template>
   <div class="intro">
+    一共有 {{ concert.block }} 个区，每个区的第一排有
+    {{ concert.front }} 个座位，每一排递增 {{ concert.step }} 个座位，最后一排有
+    {{ concert.back }} 个座位<br />
     一共有 {{ concert.sum }} 个座位，已经使用 {{ concert.used }} 个座位，还剩下
     {{ concert.remain }}个座位<br />
     一共有 {{ users.length }} 个用户，购票成功
