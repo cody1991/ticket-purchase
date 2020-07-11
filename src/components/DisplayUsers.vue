@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 22:13:27
- * @LastEditTime: 2020-07-11 15:20:19
+ * @LastEditTime: 2020-07-11 15:25:51
  * @LastEditors: codytang
  * @Description: 展示用户购票行为
 -->
@@ -55,13 +55,15 @@ export default {
   padding: 18px 0;
 }
 .pos-group {
-  margin: 18px 0 0 0;
+  margin: 0;
 }
 .pos {
   border: 1px solid #67c23a;
-  margin: 0 5px;
-  padding: 0 2px;
+  margin: 18px 5px 0;
+  padding: 4px;
   border-radius: 2px;
   box-sizing: border-box;
+  white-space: nowrap;
+  display: inline-block;
 }
 </style>
