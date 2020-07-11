@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-09 21:10:07
- * @LastEditTime: 2020-07-11 18:59:26
+ * @LastEditTime: 2020-07-11 19:25:59
  * @LastEditors: codytang
  * @Description: 购票系统
 -->
@@ -18,6 +18,9 @@
       v-if="jayChouConcert"
       :seats="[...jayChouConcert.seats]"
     ></display-seats>
+    <div class="btn" @click="stop = !stop">
+      <span v-if="!stop">停止售票</span><span v-else>开始售票</span>
+    </div>
     <display-users :users="displayUsers"></display-users>
   </div>
 </template>
@@ -50,6 +53,7 @@ export default {
       front: 1,
       back: 30,
       step: 1,
+      stop: false,
     };
   },
   components: {
@@ -79,7 +83,7 @@ export default {
       // 一旦无票，则结束整个程序
       await sleep(randomNumber(0, this.sleepMax));
 
-      if (!this.jayChouConcert) return;
+      if (!this.jayChouConcert || this.stop) continue;
 
       if (Math.random() > this.refundRate) {
         // 新用户购票逻辑，购票不考虑已存在用户重新购票
@@ -145,5 +149,13 @@ export default {
 }
 .warning {
   color: #e6a23c;
+}
+.btn {
+  border: 1px solid #000;
+  display: inline-block;
+  padding: 4px 16px;
+  border-radius: 4px;
+  margin-top: 20px;
+  cursor: pointer;
 }
 </style>

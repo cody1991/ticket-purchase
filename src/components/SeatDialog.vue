@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-11 17:43:16
- * @LastEditTime: 2020-07-11 18:42:34
+ * @LastEditTime: 2020-07-11 19:20:42
  * @LastEditors: codytang
  * @Description: 弹层消息
 -->
@@ -20,7 +20,7 @@
             暂未被购买
           </span>
         </p>
-        <div @click="close" class="confirm-btn">我知道了</div>
+        <div @click="close" class="btn">我知道了</div>
       </div>
     </div>
   </transition>
@@ -94,13 +94,5 @@ export default {
   background-color: #fff;
   border-radius: 10px;
   font-size: 14px;
-}
-.confirm-btn {
-  border: 1px solid #000;
-  display: inline-block;
-  padding: 10px 30px;
-  border-radius: 4px;
-  margin-top: 20px;
-  cursor: pointer;
 }
 </style>
