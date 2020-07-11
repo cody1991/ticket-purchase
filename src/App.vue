@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-09 21:10:07
- * @LastEditTime: 2020-07-11 12:21:39
+ * @LastEditTime: 2020-07-11 12:35:40
  * @LastEditors: codytang
  * @Description: 购票系统
 -->
@@ -57,7 +57,7 @@ export default {
     },
   },
   async mounted() {
-    // 周杰伦演唱会
+    // 周杰伦的演唱会
     this.jayChouConcert = new Seats({
       block: 4,
       front: 5,
@@ -69,7 +69,10 @@ export default {
       await sleep(randomNumber(0, 100));
       const user = new User();
       this.users.unshift(user);
-      if (this.jayChouConcert.remain - user.ticket >= 0) {
+      if (
+        this.jayChouConcert &&
+        this.jayChouConcert.remain - user.ticket >= 0
+      ) {
         user.purchaseTicketPos = this.jayChouConcert.purchaseTicket(
           user.ticket
         );

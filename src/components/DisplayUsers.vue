@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 22:13:27
- * @LastEditTime: 2020-07-11 12:21:51
+ * @LastEditTime: 2020-07-11 12:33:33
  * @LastEditors: codytang
  * @Description: 展示用户购票行为
 -->
@@ -16,7 +16,7 @@
           v-for="pos in user.purchaseTicketPos"
           :key="pos.row + pos.col"
           class="pos"
-          >{{ pos.row }}排{{ pos.col }}座</span
+          >{{ pos.block }}区{{ pos.row }}排{{ pos.col }}座</span
         >
       </span>
       <span v-else style="color: red;">

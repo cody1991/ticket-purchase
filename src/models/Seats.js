@@ -1,7 +1,7 @@
 /*
  * @Author: codytang
  * @Date: 2020-07-09 21:16:00
- * @LastEditTime: 2020-07-11 00:41:24
+ * @LastEditTime: 2020-07-11 12:33:54
  * @LastEditors: codytang
  * @Description: 生成演唱会座位
  */
@@ -70,7 +70,7 @@ class Seats {
         if (curItem[cols] === 0 && count !== 0) {
           curItem[cols] = 1;
 
-          curUsedList.push(this.calcPosition(rows, cols));
+          curUsedList.push(this.calcPosition(rows, cols, rowsLen));
 
           count = count - 1;
         }
@@ -82,9 +82,12 @@ class Seats {
     return curUsedList;
   }
 
-  calcPosition(row, col) {
+  calcPosition(row, col, rowsLen) {
     // todo 新增 区块
     return {
+      block: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"[
+        Math.floor(col / (rowsLen / this.block))
+      ], // 简单获取区块标识，从A-Za-z，不能超过 26 * 2
       row: this.floor - row, // 返回第几排
       col: col + 1, // 返回第几列
     };
