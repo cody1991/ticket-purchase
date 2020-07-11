@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-09 21:10:07
- * @LastEditTime: 2020-07-11 00:38:46
+ * @LastEditTime: 2020-07-11 12:21:39
  * @LastEditors: codytang
  * @Description: 购票系统
 -->
@@ -65,21 +65,11 @@ export default {
       step: 2,
     });
 
-    for (let index = 0; index < 1000; index += 1) {
+    while (this.jayChouConcert && this.jayChouConcert.remain) {
+      await sleep(randomNumber(0, 100));
       const user = new User();
-
-      if (this.jayChouConcert && this.jayChouConcert.remain === 0) {
-        alert("卖完票啦");
-        break;
-      }
-
-      await sleep(randomNumber(0, 1500));
-
       this.users.unshift(user);
-      if (
-        this.jayChouConcert &&
-        this.jayChouConcert.remain - user.ticket >= 0
-      ) {
+      if (this.jayChouConcert.remain - user.ticket >= 0) {
         user.purchaseTicketPos = this.jayChouConcert.purchaseTicket(
           user.ticket
         );
@@ -100,7 +90,6 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-
 .seat {
   display: inline-block;
   width: 5px;
