@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-09 21:10:07
- * @LastEditTime: 2020-07-11 18:48:48
+ * @LastEditTime: 2020-07-11 18:59:26
  * @LastEditors: codytang
  * @Description: 购票系统
 -->
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import Seats from "@/models/Seats.js";
+import AdvancedSeats from "@/models/AdvancedSeats";
 import User from "@/models/User.js";
 
 // 设置每个人的购票上限，测试用
@@ -68,7 +68,7 @@ export default {
   },
   async mounted() {
     // 周杰伦的演唱会
-    this.jayChouConcert = new Seats({
+    this.jayChouConcert = new AdvancedSeats({
       block: this.block,
       front: this.front,
       back: this.back,
