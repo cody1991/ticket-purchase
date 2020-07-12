@@ -1,7 +1,7 @@
 /*
  * @Author: codytang
  * @Date: 2020-07-09 21:16:00
- * @LastEditTime: 2020-07-11 23:02:48
+ * @LastEditTime: 2020-07-12 15:28:45
  * @LastEditors: codytang
  * @Description: 生成演唱会座位
  */
@@ -27,7 +27,6 @@ class Seats {
     this.used = 0; // 已经售出的座位
 
     this.freeMap = new Map(); // 未售出
-    this.busyMap = new Map(); // 已售出
 
     /**
      * 计算楼层数

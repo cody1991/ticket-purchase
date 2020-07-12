@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-09 21:10:07
- * @LastEditTime: 2020-07-12 00:40:10
+ * @LastEditTime: 2020-07-12 16:58:09
  * @LastEditors: codytang
  * @Description: 购票系统
 -->
@@ -103,7 +103,12 @@ export default {
           this.jayChouConcert.remain - user.ticket >= 0
         ) {
           user.purchaseTicketPos = this.jayChouConcert.purchaseTicket(user);
-          user.status = "SUCCESS";
+          if (user.purchaseTicketPos && user.purchaseTicketPos.length > 0) {
+            user.status = "SUCCESS";
+          } else {
+            user.status = "FAIL";
+            user.purchaseTicketPos = [];
+          }
         } else {
           user.status = "FAIL";
           user.purchaseTicketPos = [];
