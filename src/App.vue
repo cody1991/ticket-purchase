@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-09 21:10:07
- * @LastEditTime: 2020-07-12 18:37:48
+ * @LastEditTime: 2020-07-12 22:12:53
  * @LastEditors: codytang
  * @Description: 购票系统
 -->
@@ -178,6 +178,7 @@ export default {
   margin-left: 10px;
   margin-right: 10px;
   cursor: pointer;
+  font-size: 12px;
 }
 .github {
   width: 20px;

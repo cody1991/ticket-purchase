@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 22:06:46
- * @LastEditTime: 2020-07-12 18:56:28
+ * @LastEditTime: 2020-07-12 22:15:55
  * @LastEditors: codytang
  * @Description: README
 -->
@@ -11,7 +11,7 @@
 ## 任务列表
 
 - Other
-  - [ ] 新增算法的思维导图
+  - [x] 新增算法的流程图
   - [ ] 展示演唱会的位置使用 canvas 绘制，现在座位太多的话很卡。。（非必须）
 - Class
   - [x] User: 购票用户信息与行为
@@ -32,3 +32,7 @@
   - [x] 支持退票
   - [x] 随机购票
   - [x] 邻座分配（只考虑横向的邻座）
+
+## 流程图
+
+![流程图](./public/flow.png)
