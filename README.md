@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 22:06:46
- * @LastEditTime: 2020-07-12 00:20:45
+ * @LastEditTime: 2020-07-12 15:03:12
  * @LastEditors: codytang
  * @Description: README
 -->
@@ -13,7 +13,7 @@
 - Class
   - [x] User: 购票用户信息与行为
   - [x] Seats: 演唱会座位信息
-  - [ ] AdvancedSeas: 继承 Seats，优化购票算法
+  - [x] AdvancedSeas: 继承 Seats，优化购票算法
 - Views
   - [x] Helloworld: 简单的项目介绍
   - [x] DisplaySeats: 展示演唱会座位
@@ -28,4 +28,4 @@
   - [x] purchase ticket by order 按顺序购票，无太多逻辑
   - [x] 支持退票
   - [x] 随机购票
-  - [ ] 邻座分配
+  - [ ] 邻座分配（只考虑横向的邻座）
