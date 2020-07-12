@@ -1,21 +1,54 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 23:01:38
- * @LastEditTime: 2020-07-11 18:50:31
+ * @LastEditTime: 2020-07-12 18:50:40
  * @LastEditors: codytang
  * @Description: 
 -->
 
 <template>
   <div class="intro">
-    一共有 {{ concert.block }} 个区，每个区的第一排有
-    {{ concert.front }} 个座位，每一排递增 {{ concert.step }} 个座位，最后一排有
-    {{ concert.back }} 个座位<br />
-    一共有 {{ concert.sum }} 个座位，已经使用 {{ concert.used }} 个座位，还剩下
-    {{ concert.remain }}个座位<br />
-    一共有 {{ users.length }} 个用户，购票成功
-    {{ usersSuccess.length }}个，退票成功 {{ usersRefund.length }}个，购票失败
-    {{ usersFail.length }}个<br />
+    <p>
+      一共有<span>{{ concert.block }}</span
+      >个区，每一排递增<span>{{ concert.step }}</span
+      >个座位，共<span>{{ concert.sum }}</span
+      >个座位
+    </p>
+    <p>
+      第1排有<span>{{ concert.front }}</span
+      >个座位，最后1排有<span>{{ concert.back }}</span
+      >个座位
+    </p>
+    <p>
+      已经使用<span>{{ concert.used }}</span
+      >个座位，还剩下<span>{{ concert.remain }}</span
+      >个座位
+    </p>
+    <div class="hr"></div>
+
+    <p>
+      一共有<span>{{ users.length }}</span
+      >个用户购票，其中购票成功的有
+      <span class="success">{{ usersSuccess.length }}</span
+      >个
+    </p>
+    <p>
+      购买了邻座的用户有<span class="success">{{
+        concert.adjacentSeatCount
+      }}</span
+      >个，非邻座有
+      <span class="warning">{{ concert.notAdjacentSeatCount }}</span
+      >个
+    </p>
+    <p>
+      一共有<span class="warning">{{ usersRefund.length }}</span
+      >个用户退票，用户退票的概率为
+      <span class="warning">{{ refundRate }}</span>
+    </p>
+    <p>
+      一共有<span class="error">{{ usersFail.length }}</span
+      >个用户购票失败
+    </p>
     <div class="seat"></div>
     代表空闲座位
     <div class="seat occupy"></div>
@@ -34,6 +67,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    refundRate: {
+      type: Number,
+      default: () => 0,
+    },
   },
   computed: {
     usersSuccess() {
@@ -51,7 +88,16 @@ export default {
 
 <style scoped>
 .intro {
-  font-size: 10px;
+  font-size: 12px;
   margin: 20px;
+}
+.intro span {
+  font-weight: bold;
+  font-size: 16px;
+  margin: 0 2px;
+}
+.intro .hr {
+  height: 1px;
+  background: skyblue;
 }
 </style>

@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-09 21:10:07
- * @LastEditTime: 2020-07-12 16:58:09
+ * @LastEditTime: 2020-07-12 18:37:48
  * @LastEditors: codytang
  * @Description: 购票系统
 -->
@@ -16,6 +16,7 @@
       v-if="jayChouConcert"
       :concert="jayChouConcert"
       :users="users"
+      :refundRate="refundRate"
     ></intro>
     <display-seats
       v-if="jayChouConcert"
@@ -51,10 +52,10 @@ export default {
       users: [],
       displayUsersLen: 25, // 用户展示区域的最大长度
       sleepMax: 100, // 模拟等待时间的峰值
-      refundRate: 0.1, // 用户退票的概率
-      block: 2,
+      refundRate: 0.2, // 用户退票的概率
+      block: 3,
       front: 2,
-      back: 40,
+      back: 20,
       step: 1,
       stop: false,
     };
@@ -77,58 +78,61 @@ export default {
     handleStopStatus() {
       this.stop = !this.stop;
     },
-  },
-  async mounted() {
-    // 周杰伦的演唱会
-    this.jayChouConcert = new AdvancedSeats({
-      block: this.block,
-      front: this.front,
-      back: this.back,
-      step: this.step,
-    });
+    async init() {
+      // 周杰伦的演唱会
+      this.jayChouConcert = new AdvancedSeats({
+        block: this.block,
+        front: this.front,
+        back: this.back,
+        step: this.step,
+      });
 
-    console.log(this.jayChouConcert);
+      console.log(this.jayChouConcert);
 
-    while (this.jayChouConcert && this.jayChouConcert.remain) {
-      // 一旦无票，则结束整个程序
-      await sleep(randomNumber(0, this.sleepMax));
+      while (this.jayChouConcert && this.jayChouConcert.remain) {
+        // 一旦无票，则结束整个程序
+        await sleep(randomNumber(0, this.sleepMax));
 
-      if (!this.jayChouConcert || this.stop) continue;
+        if (!this.jayChouConcert || this.stop) continue;
 
-      if (Math.random() > this.refundRate) {
-        // 新用户购票逻辑，购票不考虑已存在用户重新购票
-        const user = new User();
-        if (
-          this.jayChouConcert &&
-          this.jayChouConcert.remain - user.ticket >= 0
-        ) {
-          user.purchaseTicketPos = this.jayChouConcert.purchaseTicket(user);
-          if (user.purchaseTicketPos && user.purchaseTicketPos.length > 0) {
-            user.status = "SUCCESS";
+        if (Math.random() > this.refundRate) {
+          // 新用户购票逻辑，购票不考虑已存在用户重新购票
+          const user = new User();
+          if (
+            this.jayChouConcert &&
+            this.jayChouConcert.remain - user.ticket >= 0
+          ) {
+            user.purchaseTicketPos = this.jayChouConcert.purchaseTicket(user);
+            if (user.purchaseTicketPos && user.purchaseTicketPos.length > 0) {
+              user.status = "SUCCESS";
+            } else {
+              user.status = "FAIL";
+              user.purchaseTicketPos = [];
+            }
           } else {
             user.status = "FAIL";
             user.purchaseTicketPos = [];
           }
+          this.users.unshift(user);
         } else {
-          user.status = "FAIL";
-          user.purchaseTicketPos = [];
-        }
-        this.users.unshift(user);
-      } else {
-        // 用户退票逻辑处理
-        if (this.users.length && this.users.length > 0) {
-          const index = randomNumber(0, this.users.length - 1);
-          const user = this.users[index];
-          if (user.status === "SUCCESS") {
-            // 只处理成功买票的
-            user.status = "REFUND";
-            this.users.splice(index, 1);
-            this.users.unshift(user);
-            this.jayChouConcert.refundTicket(user);
+          // 用户退票逻辑处理
+          if (this.users.length && this.users.length > 0) {
+            const index = randomNumber(0, this.users.length - 1);
+            const user = this.users[index];
+            if (user.status === "SUCCESS") {
+              // 只处理成功买票的
+              user.status = "REFUND";
+              this.users.splice(index, 1);
+              this.users.unshift(user);
+              this.jayChouConcert.refundTicket(user);
+            }
           }
         }
       }
-    }
+    },
+  },
+  mounted() {
+    this.init();
   },
 };
 </script>
@@ -141,7 +145,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 10px;
 }
 .seat {
   display: inline-block;
@@ -171,11 +175,13 @@ export default {
   padding: 4px 16px;
   border-radius: 4px;
   margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
   cursor: pointer;
 }
 .github {
-  width: 40px;
-  height: 40px;
+  width: 20px;
+  height: 20px;
   display: block;
   margin: 10px auto;
 }

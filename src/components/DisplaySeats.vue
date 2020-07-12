@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 22:24:47
- * @LastEditTime: 2020-07-11 18:42:07
+ * @LastEditTime: 2020-07-12 18:40:40
  * @LastEditors: codytang
  * @Description: 展示座位
 -->
@@ -71,6 +71,6 @@ export default {
   display: inline-block;
 }
 .intro {
-  font-size: 14px;
+  font-size: 12px;
 }
 </style>

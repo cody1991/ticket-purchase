@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 22:13:27
- * @LastEditTime: 2020-07-11 17:19:44
+ * @LastEditTime: 2020-07-12 17:56:43
  * @LastEditors: codytang
  * @Description: 展示用户购票行为
 -->
@@ -24,7 +24,7 @@
         </div>
       </span>
       <span v-else-if="user.status === 'FAIL'" class="error">
-        购票失败
+        购票失败，需要购买 {{ user.ticket }} 张
       </span>
       <span v-else-if="user.status === 'REFUND'" class="warning">
         退票成功
