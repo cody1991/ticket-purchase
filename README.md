@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 22:06:46
- * @LastEditTime: 2020-07-13 11:08:50
+ * @LastEditTime: 2020-07-13 11:16:05
  * @LastEditors: codytang
  * @Description: README
 -->
@@ -11,6 +11,18 @@
 ## Demo 地址
 
 https://cody1991.github.io/ticket-purchase/?back=100&block=4&front=50&refundRate=0.1&sleepMax=50&step=2
+
+## URL 参数使用
+
+| 参数名          | 说明                             | 参数值          |
+| --------------- | -------------------------------- | --------------- |
+| displayUsersLen | 展示用户行为列表的最大值         | > 0, 默认 25    |
+| sleepMax        | 模拟每次购票用户等待时间的最大值 | > 0, 默认 100ms |
+| refundRate      | 用户退票的概率                   | >= 0, 默认 0.2  |
+| block           | 区块数                           | > 0, 默认 2     |
+| front           | 第一排的座位数量                 | > 0, 默认 2     |
+| back            | 最后一排的座位数量               | > 0, 默认 20    |
+| step            | 每排递增的数量                   | != 0, 默认 1    |
 
 ## 任务列表
 
