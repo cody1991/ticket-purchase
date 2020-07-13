@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 22:06:46
- * @LastEditTime: 2020-07-13 11:32:25
+ * @LastEditTime: 2020-07-13 12:56:37
  * @LastEditors: codytang
  * @Description: README
 -->
@@ -15,6 +15,14 @@ https://cody1991.github.io/ticket-purchase/?back=100&block=4&front=50&refundRate
 运行结果
 
 ![运行结果](./public/result.png)
+
+---
+
+https://cody1991.github.io/ticket-purchase
+
+运行结果
+
+![运行结果](./public/result-2.png)
 
 ## URL 参数使用
 
