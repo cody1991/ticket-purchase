@@ -1,7 +1,7 @@
 /*
  * @Author: codytang
  * @Date: 2020-07-09 21:16:00
- * @LastEditTime: 2020-07-12 15:28:45
+ * @LastEditTime: 2020-07-13 10:50:00
  * @LastEditors: codytang
  * @Description: 生成演唱会座位
  */
@@ -17,7 +17,12 @@ class Seats {
    */
 
   constructor({ block = 5, front = 50, back = 100, step = 2 }) {
-    if (back < front) [back, front] = [front, back];
+    if (step > 0 && back < front) [back, front] = [front, back];
+    if (step < 0 && front < back) [back, front] = [front, back];
+
+    if (step === 0) alert('每排递增数量不能为0');
+    if (front <= 0 || back <= 0 || block <= 0)
+      alert('每排的数量和区块数不能小于等于0');
 
     this.block = block;
     this.front = front;
@@ -100,7 +105,7 @@ class Seats {
   }
 
   calcBlock(col, rowsLen, block) {
-    return "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"[
+    return 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'[
       Math.floor(col / (rowsLen / block))
     ]; // 简单获取区块标识，从A-Za-z，不能超过 26 * 2
   }

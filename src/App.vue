@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-09 21:10:07
- * @LastEditTime: 2020-07-12 22:12:53
+ * @LastEditTime: 2020-07-13 10:57:49
  * @LastEditors: codytang
  * @Description: 购票系统
 -->
@@ -30,33 +30,40 @@
 </template>
 
 <script>
-import AdvancedSeats from "@/models/AdvancedSeats";
-import User from "@/models/User.js";
+import AdvancedSeats from '@/models/AdvancedSeats';
+import User from '@/models/User.js';
 
 // 设置每个人的购票上限，测试用
 User.ticketLimit = 5;
 
-import HelloWorld from "@/components/HelloWorld.vue";
-import DisplayUsers from "@/components/DisplayUsers.vue";
-import DisplaySeats from "@/components/DisplaySeats.vue";
-import Intro from "@/components/Intro.vue";
-import { randomNumber, sleep } from "@/libs/utils";
+import HelloWorld from '@/components/HelloWorld.vue';
+import DisplayUsers from '@/components/DisplayUsers.vue';
+import DisplaySeats from '@/components/DisplaySeats.vue';
+import Intro from '@/components/Intro.vue';
+import { randomNumber, sleep, getUrlParams } from '@/libs/utils';
+
+const urlParmas = getUrlParams();
+// block=1&sleepMax=100&refundRate=0.1&step=2&back=20&front=1
 
 export default {
-  name: "App",
+  name: 'App',
   data() {
     return {
-      appName: "Ticket Purchase",
+      displayUsersLen:
+        Number(urlParmas.displayUsersLen) > 0
+          ? Number(urlParmas.displayUsersLen) > 0
+          : 25, // 用户展示区域的最大长度
+      sleepMax:
+        Number(urlParmas.sleepMax) > 0 ? Number(urlParmas.sleepMax) : 100, // 模拟等待时间的峰值
+      refundRate: Number(urlParmas.refundRate) ?? 0.2, // 用户退票的概率，使用??运算符 https://zh.javascript.info/nullish-coalescing-operator
+      block: Number(urlParmas.block) || 3,
+      front: Number(urlParmas.front) || 2,
+      back: Number(urlParmas.back) || 20,
+      step: Number(urlParmas.step) || 1,
+      appName: 'Ticket Purchase',
       jayChouConcert: null,
       seats: [],
       users: [],
-      displayUsersLen: 25, // 用户展示区域的最大长度
-      sleepMax: 100, // 模拟等待时间的峰值
-      refundRate: 0.2, // 用户退票的概率
-      block: 3,
-      front: 2,
-      back: 20,
-      step: 1,
       stop: false,
     };
   },
@@ -104,13 +111,13 @@ export default {
           ) {
             user.purchaseTicketPos = this.jayChouConcert.purchaseTicket(user);
             if (user.purchaseTicketPos && user.purchaseTicketPos.length > 0) {
-              user.status = "SUCCESS";
+              user.status = 'SUCCESS';
             } else {
-              user.status = "FAIL";
+              user.status = 'FAIL';
               user.purchaseTicketPos = [];
             }
           } else {
-            user.status = "FAIL";
+            user.status = 'FAIL';
             user.purchaseTicketPos = [];
           }
           this.users.unshift(user);
@@ -119,9 +126,9 @@ export default {
           if (this.users.length && this.users.length > 0) {
             const index = randomNumber(0, this.users.length - 1);
             const user = this.users[index];
-            if (user.status === "SUCCESS") {
+            if (user.status === 'SUCCESS') {
               // 只处理成功买票的
-              user.status = "REFUND";
+              user.status = 'REFUND';
               this.users.splice(index, 1);
               this.users.unshift(user);
               this.jayChouConcert.refundTicket(user);
