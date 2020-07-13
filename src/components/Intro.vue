@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 23:01:38
- * @LastEditTime: 2020-07-12 18:50:40
+ * @LastEditTime: 2020-07-13 12:36:06
  * @LastEditors: codytang
  * @Description: 
 -->
@@ -93,11 +93,13 @@ export default {
 }
 .intro span {
   font-weight: bold;
-  font-size: 16px;
   margin: 0 2px;
 }
 .intro .hr {
   height: 1px;
   background: skyblue;
+  max-width: 320px;
+  display: block;
+  margin: 0 auto;
 }
 </style>

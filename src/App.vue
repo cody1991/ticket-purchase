@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-09 21:10:07
- * @LastEditTime: 2020-07-13 11:29:38
+ * @LastEditTime: 2020-07-13 12:36:22
  * @LastEditors: codytang
  * @Description: 购票系统
 -->
@@ -170,7 +170,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 10px;
+  margin: 0 auto;
+  max-width: 640px;
 }
 .seat {
   display: inline-block;
@@ -184,7 +185,6 @@ export default {
 .seat.occupy {
   background: red;
 }
-
 .success {
   color: #67c23a;
 }
@@ -208,11 +208,10 @@ export default {
 .github-intro {
   text-align: center;
   color: #000;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .github-intro a {
   text-decoration: none;
-  font-size: 18px;
 }
 </style>
