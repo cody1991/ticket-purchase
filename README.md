@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 22:06:46
- * @LastEditTime: 2020-07-12 22:15:55
+ * @LastEditTime: 2020-07-13 11:08:50
  * @LastEditors: codytang
  * @Description: README
 -->
@@ -16,7 +16,7 @@ https://cody1991.github.io/ticket-purchase/?back=100&block=4&front=50&refundRate
 
 - Other
   - [x] 新增算法的流程图
-  - [ ] 展示演唱会的位置使用 canvas 绘制，现在座位太多的话很卡。。（非必须）
+  - [x] 展示演唱会的位置使用 canvas 绘制（现在座位太多的话很卡，先简单处理，座位数太多的时候隐藏）
 - Class
   - [x] User: 购票用户信息与行为
   - [x] Seats: 演唱会座位信息
