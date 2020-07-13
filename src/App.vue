@@ -10,7 +10,7 @@
   <div id="app">
     <HelloWorld :msg="`Welcome to Your ${appName} App`" />
     <p class="github-intro">
-      点击参看
+      点击查看
       <a href="https://github.com/cody1991/ticket-purchase" class="success">
         仓库
       </a>

@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 23:01:38
- * @LastEditTime: 2020-07-13 12:36:06
+ * @LastEditTime: 2020-07-13 13:00:51
  * @LastEditors: codytang
  * @Description: 
 -->
@@ -20,7 +20,7 @@
       >个座位
     </p>
     <p>
-      已经使用<span>{{ concert.used }}</span
+      已经售出<span>{{ concert.used }}</span
       >个座位，还剩下<span>{{ concert.remain }}</span
       >个座位
     </p>
