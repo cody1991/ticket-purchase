@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 22:13:27
- * @LastEditTime: 2020-07-12 17:56:43
+ * @LastEditTime: 2020-07-13 12:31:34
  * @LastEditors: codytang
  * @Description: 展示用户购票行为
 -->
@@ -13,7 +13,9 @@
       <!-- (ID: {{ user.id && user.id.slice(0, 4) }}) -->
       <span v-if="user.status === 'SUCCESS'" class="success">
         购买了
-        {{ user.ticket }} 张票
+        {{ user.ticket }} 张票<span v-if="user.isAdjacentSeat" class="success"
+          >（邻座）</span
+        ><span v-else class="warning">（非邻座）</span>
         <div class="pos-group">
           <span
             v-for="pos in user.purchaseTicketPos"
