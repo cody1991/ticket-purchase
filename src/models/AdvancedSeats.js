@@ -1,13 +1,13 @@
 /*
  * @Author: codytang
  * @Date: 2020-07-11 18:57:35
- * @LastEditTime: 2020-07-12 18:20:27
+ * @LastEditTime: 2020-07-13 11:44:11
  * @LastEditors: codytang
  * @Description: 优化选座位算法
  */
 
-import { randomNumber } from "@/libs/utils";
-import Seats from "./Seats";
+import { randomNumber } from '@/libs/utils';
+import Seats from './Seats';
 class AdvancedSeats extends Seats {
   constructor(options = {}) {
     super(options);
@@ -19,7 +19,7 @@ class AdvancedSeats extends Seats {
   getSeatInfo(array, index) {
     const selectItem = array[index];
     const [key, value] = selectItem;
-    let [row, col] = key.split("-");
+    let [row, col] = key.split('-');
     row = Number(row);
     col = Number(col);
     return {
@@ -59,10 +59,10 @@ class AdvancedSeats extends Seats {
 
   purchaseTicket(user) {
     const { ticket } = user;
-    console.log("```````");
+    console.log('```````');
     console.log(`${user.name} 开始购票，票数为 ${ticket}`);
     if (this.remain < ticket) {
-      console.log("票太少啦");
+      console.log('票太少啦');
       return;
     }
     const freeMapArray = Array.from(this.freeMap.entries());
@@ -76,7 +76,7 @@ class AdvancedSeats extends Seats {
       const { row: targetRow, col: targetCol } = selectItem;
 
       if (noSpaceSeat.get(`${targetRow}-${targetCol}`)) {
-        console.log("这个已经不能再用啦");
+        console.log('这个已经不能再用啦');
         continue;
       }
 
@@ -120,13 +120,14 @@ class AdvancedSeats extends Seats {
         });
         this.used += ticket;
         this.adjacentSeatCount += 1;
+        user.isAdjacentSeat = true;
         hadFound = true;
       }
     }
 
     if (noSpaceSeat.size === this.freeMap.size && noSpaceSeat.size > 0) {
       // 无法邻座
-      console.log("无法邻座");
+      console.log('无法邻座');
       this.notAdjacentSeatCount += 1;
       let selectSeatIndex = randomNumber(0, this.freeMap.size - 1); // 随机选择一个点
       for (let index = 0; index < ticket; index += 1) {
@@ -153,6 +154,7 @@ class AdvancedSeats extends Seats {
       selectSeatKeys.map((key) => {
         this.freeMap.delete(key);
       });
+      user.isAdjacentSeat = false;
       this.used += ticket;
     }
 
@@ -161,9 +163,9 @@ class AdvancedSeats extends Seats {
         `他选择了`,
         curUsedList
           .map((item) => `${item.block}区${item.row}排${item.col}座`)
-          .join(", ")
+          .join(', ')
       );
-      console.log("```````");
+      console.log('```````');
     } else {
       console.log(`他购票失败`);
     }
@@ -189,6 +191,12 @@ class AdvancedSeats extends Seats {
       });
     });
     this.used -= user.purchaseTicketPos.length;
+
+    if (user.isAdjacentSeat) {
+      this.adjacentSeatCount--;
+    } else {
+      this.notAdjacentSeatCount--;
+    }
   }
 }
 
