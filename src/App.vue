@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-09 21:10:07
- * @LastEditTime: 2020-07-13 11:07:15
+ * @LastEditTime: 2020-07-13 11:29:38
  * @LastEditors: codytang
  * @Description: 购票系统
 -->
@@ -9,9 +9,19 @@
 <template>
   <div id="app">
     <HelloWorld :msg="`Welcome to Your ${appName} App`" />
-    <a href="https://github.com/cody1991/ticket-purchase" class="github">
-      <img src="./assets/GitHub.png" alt="" />
-    </a>
+    <p class="github-intro">
+      点击参看
+      <a href="https://github.com/cody1991/ticket-purchase" class="success">
+        仓库
+      </a>
+      /
+      <a
+        href="https://github.com/cody1991/ticket-purchase#url-%E5%8F%82%E6%95%B0%E4%BD%BF%E7%94%A8"
+        class="success"
+      >
+        参数说明
+      </a>
+    </p>
     <intro
       v-if="jayChouConcert"
       :concert="jayChouConcert"
@@ -54,7 +64,8 @@ export default {
           : 25, // 用户展示区域的最大长度
       sleepMax:
         Number(urlParmas.sleepMax) > 0 ? Number(urlParmas.sleepMax) : 100, // 模拟等待时间的峰值
-      refundRate: Number(urlParmas.refundRate) ?? 0.2, // 用户退票的概率，使用??运算符 https://zh.javascript.info/nullish-coalescing-operator
+      refundRate:
+        Number(urlParmas.refundRate) >= 0 ? Number(urlParmas.refundRate) : 0.2,
       block: Number(urlParmas.block) || 3,
       front: Number(urlParmas.front) || 2,
       back: Number(urlParmas.back) || 20,
@@ -194,14 +205,14 @@ export default {
   cursor: pointer;
   font-size: 12px;
 }
-.github {
-  width: 20px;
-  height: 20px;
-  display: block;
-  margin: 10px auto;
+.github-intro {
+  text-align: center;
+  color: #000;
+  font-size: 14px;
 }
-.github img {
-  width: 100%;
-  height: 100%;
+
+.github-intro a {
+  text-decoration: none;
+  font-size: 18px;
 }
 </style>
