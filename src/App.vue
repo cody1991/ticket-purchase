@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-09 21:10:07
- * @LastEditTime: 2020-07-13 12:36:22
+ * @LastEditTime: 2020-07-13 13:04:52
  * @LastEditors: codytang
  * @Description: 购票系统
 -->
@@ -12,7 +12,7 @@
     <p class="github-intro">
       点击查看
       <a href="https://github.com/cody1991/ticket-purchase" class="success">
-        仓库
+        GitHub仓库
       </a>
       /
       <a
