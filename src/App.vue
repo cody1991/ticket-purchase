@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-09 21:10:07
- * @LastEditTime: 2020-07-13 10:57:49
+ * @LastEditTime: 2020-07-13 11:05:40
  * @LastEditors: codytang
  * @Description: 购票系统
 -->
@@ -19,7 +19,7 @@
       :refundRate="refundRate"
     ></intro>
     <display-seats
-      v-if="jayChouConcert"
+      v-if="jayChouConcert && isShowSeats"
       :seats="[...jayChouConcert.seats]"
     ></display-seats>
     <div class="btn" @click="handleStopStatus">
@@ -43,7 +43,8 @@ import Intro from '@/components/Intro.vue';
 import { randomNumber, sleep, getUrlParams } from '@/libs/utils';
 
 const urlParmas = getUrlParams();
-// block=1&sleepMax=100&refundRate=0.1&step=2&back=20&front=1
+
+// https://cody1991.github.io/ticket-purchase/block=4&back=100&front=50&step=2&sleepMax=50&refundRate=0.1
 
 export default {
   name: 'App',
@@ -79,6 +80,14 @@ export default {
   computed: {
     displayUsers() {
       return this.users.slice(0, this.displayUsersLen);
+    },
+    isShowSeats() {
+      if (this.jayChouConcert) {
+        const { back, block, front } = this.jayChouConcert;
+        const maxSeats = Math.max(back, front);
+        if (maxSeats * block < 100) return true;
+      }
+      return false;
     },
   },
   methods: {
