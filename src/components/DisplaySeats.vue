@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 22:24:47
- * @LastEditTime: 2020-07-12 18:40:40
+ * @LastEditTime: 2020-07-13 11:48:58
  * @LastEditors: codytang
  * @Description: 展示座位
 -->
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import SeatDialog from "@/components/SeatDialog.vue";
+import SeatDialog from '@/components/SeatDialog.vue';
 export default {
   components: {
     SeatDialog,
@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     showInfo(item, row, col) {
-      console.log("showinfo");
+      console.log('showinfo');
       this.seat = {
         info: item,
         row,

@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-11 17:43:16
- * @LastEditTime: 2020-07-11 19:20:42
+ * @LastEditTime: 2020-07-13 11:49:06
  * @LastEditors: codytang
  * @Description: 弹层消息
 -->
@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     close() {
-      this.$emit("close");
+      this.$emit('close');
     },
   },
 };

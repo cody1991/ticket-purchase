@@ -74,13 +74,13 @@ export default {
   },
   computed: {
     usersSuccess() {
-      return this.users.filter((item) => item.status === "SUCCESS");
+      return this.users.filter((item) => item.status === 'SUCCESS');
     },
     usersFail() {
-      return this.users.filter((item) => item.status === "FAIL");
+      return this.users.filter((item) => item.status === 'FAIL');
     },
     usersRefund() {
-      return this.users.filter((item) => item.status === "REFUND");
+      return this.users.filter((item) => item.status === 'REFUND');
     },
   },
 };
