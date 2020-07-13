@@ -1,7 +1,7 @@
 /*
  * @Author: codytang
  * @Date: 2020-07-11 18:57:35
- * @LastEditTime: 2020-07-13 11:44:11
+ * @LastEditTime: 2020-07-13 14:22:40
  * @LastEditors: codytang
  * @Description: 优化选座位算法
  */
@@ -57,6 +57,26 @@ class AdvancedSeats extends Seats {
     return result;
   }
 
+  deleteMapKeys(map, keys) {
+    keys.map((key) => {
+      map.delete(key);
+    });
+  }
+
+  assignSeat(row, col, map, user) {
+    const key = `${row}-${col}`;
+    this.seats[row][col] = Object.assign(this.seats[row][col], {
+      state: 1,
+      user,
+    });
+    const selectKey = map.get(key);
+    return {
+      row,
+      col,
+      block: selectKey.block,
+    };
+  }
+
   purchaseTicket(user) {
     const { ticket } = user;
     console.log('```````');
@@ -101,23 +121,12 @@ class AdvancedSeats extends Seats {
         const curSeat = minSeat;
         for (let index = 0; index < ticket; index += 1) {
           const { row, col } = curSeat;
-          const key = `${row}-${col}`;
-          this.seats[row][col] = Object.assign(this.seats[row][col], {
-            state: 1,
-            user,
-          });
-          const selectKey = this.freeMap.get(key);
-          curUsedList.push({
-            row,
-            col,
-            block: selectKey.block,
-          });
-          selectSeatKeys.push(key);
+          curUsedList.push(this.assignSeat(row, col, this.freeMap, user));
+          selectSeatKeys.push(`${row}-${col}`);
           curSeat.col += 1;
         }
-        selectSeatKeys.map((key) => {
-          this.freeMap.delete(key);
-        });
+
+        this.deleteMapKeys(this.freeMap, selectSeatKeys);
         this.used += ticket;
         this.adjacentSeatCount += 1;
         user.isAdjacentSeat = true;
@@ -133,27 +142,15 @@ class AdvancedSeats extends Seats {
       for (let index = 0; index < ticket; index += 1) {
         const selectItem = this.getSeatInfo(freeMapArray, selectSeatIndex);
         const { row, col } = selectItem;
-        const key = `${row}-${col}`;
-        this.seats[row][col] = Object.assign(this.seats[row][col], {
-          state: 1,
-          user,
-        });
-        const selectKey = this.freeMap.get(key);
-        curUsedList.push({
-          row,
-          col,
-          block: selectKey.block,
-        });
-        selectSeatKeys.push(key);
+        curUsedList.push(this.assignSeat(row, col, this.freeMap, user));
+        selectSeatKeys.push(`${row}-${col}`);
         if (selectSeatIndex + 1 < this.freeMap.size) {
           selectSeatIndex = selectSeatIndex + 1;
         } else {
           selectSeatIndex = 0;
         }
       }
-      selectSeatKeys.map((key) => {
-        this.freeMap.delete(key);
-      });
+      this.deleteMapKeys(this.freeMap, selectSeatKeys);
       user.isAdjacentSeat = false;
       this.used += ticket;
     }
