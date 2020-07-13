@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-10 22:06:46
- * @LastEditTime: 2020-07-13 12:56:37
+ * @LastEditTime: 2020-07-13 14:38:20
  * @LastEditors: codytang
  * @Description: README
 -->
@@ -10,7 +10,7 @@
 
 ## Demo 地址
 
-https://cody1991.github.io/ticket-purchase/?back=100&block=4&front=50&refundRate=0.1&sleepMax=50&step=2
+https://cody1991.github.io/ticket-purchase/?front=50&back=100&step=2&block=4&refundRate=0.1&sleepMax=50
 
 运行结果
 
