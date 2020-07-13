@@ -1,7 +1,7 @@
 <!--
  * @Author: codytang
  * @Date: 2020-07-09 21:10:07
- * @LastEditTime: 2020-07-13 11:05:40
+ * @LastEditTime: 2020-07-13 11:07:15
  * @LastEditors: codytang
  * @Description: 购票系统
 -->
@@ -43,8 +43,6 @@ import Intro from '@/components/Intro.vue';
 import { randomNumber, sleep, getUrlParams } from '@/libs/utils';
 
 const urlParmas = getUrlParams();
-
-// https://cody1991.github.io/ticket-purchase/block=4&back=100&front=50&step=2&sleepMax=50&refundRate=0.1
 
 export default {
   name: 'App',

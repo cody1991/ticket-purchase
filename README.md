@@ -8,6 +8,10 @@
 
 # Ticket Purchase [![Build Status](https://travis-ci.org/cody1991/ticket-purchase.svg?branch=master)](https://travis-ci.org/cody1991/ticket-purchase)
 
+## Demo 地址
+
+https://cody1991.github.io/ticket-purchase/?back=100&block=4&front=50&refundRate=0.1&sleepMax=50&step=2
+
 ## 任务列表
 
 - Other
